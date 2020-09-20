@@ -15,6 +15,7 @@ class API {
   final String apiKey;
 
   factory API.sandbox() => API(apiKey: APIKeys.nCovSandboxKey);
+  factory API.production() => API(apiKey: APIKeys.nCovProductionKey);
 
   static final String host = 'ncov2019-admin.firebaseapp.com';
 
