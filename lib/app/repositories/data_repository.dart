@@ -2,24 +2,32 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_covid19_rest_api/app/repositories/endpoints_data.dart';
 import 'package:flutter_covid19_rest_api/app/services/api.dart';
 import 'package:flutter_covid19_rest_api/app/services/api_service.dart';
+import 'package:flutter_covid19_rest_api/app/services/data_cache_service.dart';
+import 'package:flutter_covid19_rest_api/app/services/endpoint_data.dart';
 import 'package:http/http.dart';
 
 class DataRepository {
-  DataRepository({@required this.apiService});
+  DataRepository({@required this.apiService, @required this.dataCacheService});
   final APIService apiService;
+  final DataCacheService dataCacheService;
 
   String _accessToken;
 
-  Future<int> getEndPointData(EndPoint endPoint) async =>
-      await _getDataRefreshingToken<int>(
+  Future<EndPointData> getEndPointData(EndPoint endPoint) async =>
+      await _getDataRefreshingToken<EndPointData>(
         onGetData: () => apiService.getEndPointData(
             accessToken: _accessToken, endPoint: endPoint),
       );
 
-  Future<EndPointsData> getAllEndPointData() async =>
-      await _getDataRefreshingToken<EndPointsData>(
-        onGetData: _getAllEndpointsData,
-      );
+  EndPointsData getAllEndPointsCachedData() => dataCacheService.getData();
+
+  Future<EndPointsData> getAllEndPointData() async {
+    final endPointsData = await _getDataRefreshingToken<EndPointsData>(
+      onGetData: _getAllEndpointsData,
+    );
+    await dataCacheService.setData(endPointsData);
+    return endPointsData;
+  }
 
   Future<T> _getDataRefreshingToken<T>({Future<T> Function() onGetData}) async {
     try {
