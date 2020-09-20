@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_covid19_rest_api/app/services/api.dart';
+import 'package:intl/intl.dart';
 
 class EndPointCardData {
   EndPointCardData({this.title, this.assetName, this.color});
@@ -46,6 +47,13 @@ class EndPointCard extends StatelessWidget {
     ),
   };
 
+  String get formattedValue {
+    if (value == null) {
+      return '';
+    }
+    return NumberFormat('##,##,##,##,##,###').format(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     final cardData = _cardsData[endPoint];
@@ -65,17 +73,33 @@ class EndPointCard extends StatelessWidget {
             children: [
               Text(
                 cardData.title,
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    .copyWith(color: cardData.color),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Image.asset(cardData.assetName),
-                  Text(
-                    value != null ? value.toString() : '',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ],
+              SizedBox(
+                height: 4.0,
+              ),
+              SizedBox(
+                height: 52.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Image.asset(
+                      cardData.assetName,
+                      color: cardData.color,
+                    ),
+                    Text(
+                      formattedValue,
+                      style: Theme.of(context).textTheme.headline4.copyWith(
+                            color: cardData.color,
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
