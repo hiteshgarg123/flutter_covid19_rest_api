@@ -1,16 +1,23 @@
-# flutter_covid19_rest_api
+# Coronavirus Tracker
 
-A new Flutter project.
+A Flutter project to provide Real-time statistics of Corona virus.
 
-## Getting Started
+### Show some :heart: and star the repo to support the project
 
-This project is a starting point for a Flutter application.
+## Getting Started 🚀
 
-A few resources to get you started if this is your first Flutter project:
+- Clone the repo `git clone https://github.com/hiteshgarg123/flutter_covid19_rest_api`
+- Install the dependicies `flutter pub get`
+- Run it `flutter run`
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Features.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Good Architecture.
+- Maintanable and Scalable code.
+- Based on Dark Theme.
+- Last updated status of API.
+- Data Caching with shared_preferences.
+
+## Contact me 📧
+
+#### Email : hiteshgarg285@gmail.com
