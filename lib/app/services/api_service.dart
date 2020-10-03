@@ -61,11 +61,3 @@ class APIService {
     EndPoint.deaths: 'data',
   };
 }
-
-class Celebrate {
-  const Celebrate({@required this.senior});
-  final String senior;
-  void best(String best) => {
-        if (senior == best) {print('Thanks and same to you sir')}
-      };
-}
